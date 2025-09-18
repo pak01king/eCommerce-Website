@@ -1,0 +1,11 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h2>Înregistrare cont nou</h2>
+<form method="post">
+    {% csrf_token %}
+    <!-- Placeholder pentru formular de înregistrare -->
+    <p>Formularul de înregistrare va fi aici.</p>
+    <button type="submit" disabled>Înregistrează-te</button>
+</form>
+<p>Ai deja cont? <a href="{% url 'login' %}">Autentifică-te aici</a>.</p>
+{% endblock %}

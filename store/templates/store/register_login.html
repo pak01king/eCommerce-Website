@@ -1,0 +1,9 @@
+{% extends "store/base.html" %}
+
+{% block title %}Autentificare sau Înregistrare{% endblock %}
+
+{% block content %}
+<h2>Autentificare sau Înregistrare</h2>
+<p>Pentru a finaliza comanda, trebuie să fii autentificat.</p>
+<a href="{% url 'login' %}">Autentificare</a> sau <a href="{% url 'register' %}">Creează cont</a>
+{% endblock %}

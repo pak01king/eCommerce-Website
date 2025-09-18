@@ -1,0 +1,79 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Suport & Contact{% endblock %}
+
+{% block extra_css %}
+<style>
+.suport-container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a {
+    color:#000000;
+
+}
+
+.suport-container h2 {
+  margin-bottom: 18px;
+  font-size: 2rem;
+  color: #222;
+  font-weight: 600;
+}
+.suport-info {
+  width: 100%;
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 18px;
+}
+.suport-info strong {
+  color: #007bff;
+}
+.suport-social {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+.suport-social img {
+  height: 2em;
+  filter: brightness(0) invert(1);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="suport-container">
+  <h2>Contact Suport</h2>
+  <div class="suport-info">
+    <p><strong>Nume:</strong> MiddleTimeWest Admin</p>
+    <p><strong>Email:</strong> <a href="mailto:admin@middletimewest.com">admin@middletimewest.com</a></p>
+    <p><strong>Telefon:</strong> <a href="tel:+40712345678">+40 712 345 678</a></p>
+    <p><strong>Adresă:</strong> Str. Exemplu 123, București, România</p>
+  </div>
+  <hr style="margin:32px 0 24px 0; width:100%; border:0; border-top:1.5px solid #eee;">
+  <div class="suport-info" style="margin-bottom:0;">
+    <h3 style="margin-bottom:12px; color:#007bff; font-size:1.3rem;">Garanție produse</h3>
+    <ul style="padding-left:18px; margin-bottom:10px;">
+      <li><strong>Durata garanției:</strong> 24 luni pentru toate ceasurile.</li>
+      <li><strong>Ce acoperă:</strong> Defecte de fabricație la mecanism, carcasă, brățară, afișaj (nu uzură sau accidente).</li>
+      <li><strong>Ce NU acoperă:</strong> Lovituri, apă, foc, uzură normală, intervenții neautorizate.</li>
+      <li><strong>Cum beneficiezi:</strong> Păstrează factura, contactează-ne la datele de mai sus și trimite produsul cu dovada achiziției.</li>
+      <li><strong>Termen soluționare:</strong> Maxim 15-30 zile lucrătoare pentru reparație sau înlocuire.</li>
+    </ul>
+    <p style="margin-bottom:0;">Pentru orice problemă legată de garanție, folosește datele de contact sau completează <a href="mailto:admin@middletimewest.com">formularul online</a>.</p>
+  </div>
+  <div class="suport-social">
+    <a href="https://www.instagram.com/themiddletimewest/" target="_blank" rel="noopener" title="Instagram"><img src="{% static 'images/icons8-instagram-logo-48.png' %}" alt="Instagram"></a>
+    <a href="#" title="Facebook"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a>
+    <a href="#" title="LinkedIn"><img src="{% static 'images/icons8-linkedin-48.png' %}" alt="LinkedIn"></a>
+    <a href="#" title="TikTok"><img src="{% static 'images/icons8-tiktok-48.png' %}" alt="TikTok"></a>
+  </div>
+</div>
+{% endblock %}

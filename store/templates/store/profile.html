@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Profilul meu{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+	<h2>Profilul meu</h2>
+	{% if success %}
+		<div class="profile-success">Datele au fost salvate cu succes!</div>
+	{% endif %}
+	<form method="post" class="profile-form">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="profile-btn">{% if form.instance.pk %}Actualizează{% else %}Salvează{% endif %}</button>
+	</form>
+</div>
+{% endblock %}

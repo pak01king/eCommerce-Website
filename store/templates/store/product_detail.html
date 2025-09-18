@@ -1,0 +1,72 @@
+{% extends "store/base.html" %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+    <div class="product-gallery">
+        <div class="slider-gallery">
+            <button class="slider-arrow prev" aria-label="Imagine anterioară">&#8592;</button>
+            <div class="slider-images">
+                {% if main_image.url %}
+                    <img src="{{ main_image.url }}" alt="{{ product.title }}" class="slider-img active" data-color="">
+                {% endif %}
+                {% for img in images_with_color %}
+                    <img src="{{ img.url }}" alt="{{ product.title }}" class="slider-img" data-color="{{ img.color }}">
+                {% endfor %}
+            </div>
+            <button class="slider-arrow next" aria-label="Imagine următoare">&#8594;</button>
+        </div>
+    </div>
+    <div class="product-info">
+        <h1>{{ product.title }}</h1>
+        {% if product.brand %}<div class="product-brand">Brand: {{ product.brand.name }}</div>{% endif %}
+        <div class="product-price">{{ product.price }} USD</div>
+        {% if product.colors.all %}
+        <div class="color-select-row">
+            <span class="color-label">Color Watch:</span>
+            <div class="color-options">
+                {% for color in product.colors.all %}
+                    <label class="color-img-label">
+                        <input type="radio" name="color" value="{{ color.id }}" style="display:none;" onclick="showColorName('{{ color.name }}')">
+                        <img src="{{ color.image.url }}" alt="{{ color.name }}" class="color-img" title="{{ color.name }}" onclick="showColorName('{{ color.name }}')">
+                    </label>
+                {% endfor %}
+            </div>
+            <div id="selected-color-name" class="selected-color-name" style="margin-top:10px;font-weight:bold;"></div>
+        </div>
+        {% endif %}
+        <form method="post" action="{% url 'cart_add' product.id %}" class="add-to-cart-form">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="selected_color" value="">
+            <button type="submit" class="btn-add">Add to cart</button>
+            <a href="{% url 'product_list' %}" class="btn-back">Back To shop</a>
+        </form>
+        <button class="btn-buy">Buy now</button>
+    </div>
+</div>
+
+<div class="product-tabs">
+    <button class="tab-btn active" data-tab="descriere">Description</button>
+    <button class="tab-btn" data-tab="specificatii">Specifications</button>
+    <button class="tab-btn" data-tab="recenzii">Reviews</button>
+</div>
+<div class="tab-content" id="tab-descriere">{{ product.description|linebreaks }}</div>
+<div class="tab-content" id="tab-specificatii" style="display:none;">{{ product.specifications|linebreaks }}</div>
+<div class="tab-content" id="tab-recenzii" style="display:none;">{{ product.reviews|linebreaks }}</div>
+
+{% block extra_js %}
+<script src="{% static 'js/product_detail.js' %}"></script>
+<script>
+function showColorName(name) {
+    document.getElementById('selected-color-name').textContent = name;
+}
+</script>
+{% endblock %}
+{% endblock %}

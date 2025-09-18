@@ -1,0 +1,65 @@
+{% extends "store/base.html" %}
+{% block title %}Autentificare / Înregistrare{% endblock %}
+
+
+
+{% block content %}
+<div class="auth-vertical-center">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/login_register.css' %}">
+
+
+    <div class="auth-container">
+    <div id="login-section" class="form-switch{% if show_login %} show{% else %} hide{% endif %}">
+        <h2 class="auth-title">Autentificare</h2>
+        <form method="post" action="{% url 'login' %}" class="auth-form">
+            {% csrf_token %}
+            <label for="username">Utilizator</label>
+            <input type="text" id="username" name="username" required autocomplete="username">
+            <label for="password">Parolă</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+            <button type="submit" class="auth-btn">Autentificare</button>
+        </form>
+        <a class="toggle-link" id="show-register">Nu ai cont? Înregistrează-te</a>
+    </div>
+    <div id="register-section" class="form-switch{% if show_register %} show{% else %} hide{% endif %}">
+        <h2 class="auth-title">Înregistrare</h2>
+        {% if register_message %}
+          <div class="auth-message {% if register_success %}success{% else %}error{% endif %}">{{ register_message }}</div>
+        {% endif %}
+        <form method="post" action="{% url 'register' %}" class="auth-form register-modern-form">
+            {% csrf_token %}
+            {{ register_form.as_p }}
+            <button type="submit" class="auth-btn">Înregistrare</button>
+        </form>
+        <a class="toggle-link" id="show-login">Ai deja cont? Autentifică-te aici</a>
+    </div>
+</div>
+</div>
+<script>
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    const showRegister = document.getElementById('show-register');
+    const showLogin = document.getElementById('show-login');
+    showRegister.onclick = function() {
+        loginSection.classList.remove('show');
+        loginSection.classList.add('hide');
+        registerSection.classList.remove('hide');
+        registerSection.classList.add('show');
+    };
+    showLogin.onclick = function() {
+        registerSection.classList.remove('show');
+        registerSection.classList.add('hide');
+        loginSection.classList.remove('hide');
+        loginSection.classList.add('show');
+    };
+        // Dacă există mesaj de succes la înregistrare, arată login-ul
+        {% if register_success %}
+            loginSection.classList.add('show');
+            loginSection.classList.remove('hide');
+            registerSection.classList.add('hide');
+            registerSection.classList.remove('show');
+        {% endif %}
+</script>
+{% endblock %}

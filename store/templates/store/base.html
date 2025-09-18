@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}MiddleTimeWest{% endblock %}</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<header class="site-header">
+  <div class="container">
+    <a href="{% url 'home' %}" class="logo">MiddleTimeWest</a>
+    <nav class="site-nav">
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'product_list' %}">Collections</a>
+      <a href="{% url 'cart_detail' %}" class="cart-link" title="Cart">
+        <img src="{% static 'images/icons8-buy-50.png' %}" alt="Cart" class="cart-logo" style="height: 1.7em; vertical-align: middle; margin-bottom: 2px;">
+      </a>
+      <a href="{% url 'profile' %}">Profile</a>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'register_login' %}" class="nav-register">Register / Login</a>
+      {% else %}
+        <span class="nav-user">Hello, {{ user.username }}</span>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="nav-logout" style="background:none;border:none;color:inherit;cursor:pointer;padding:0;font:inherit;">Logout</button>
+        </form>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h4>Collection</h4>
+      <ul>
+        <li><a href="#">Classic Watches</a></li>
+        <li><a href="#">Sport Watches</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Suport</h4>
+      <ul>
+        <li><a href="{% url 'suport' %}">Support</a></li>
+        <li><a href="#">Warranty</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#" title="Facebook" class="footer-social"><img src="{% static 'images/facebook.png' %}" alt="Facebook" style="height:1.7em;"></a>
+  <a href="https://www.instagram.com/themiddletimewest/" title="Instagram" class="footer-social" target="_blank" rel="noopener"><img src="{% static 'images/icons8-instagram-logo-48.png' %}" alt="Instagram" style="height:1.7em;"></a>
+        <a href="#" title="LinkedIn" class="footer-social"><img src="{% static 'images/icons8-linkedin-48.png' %}" alt="LinkedIn" style="height:1.7em;"></a>
+        <a href="#" title="TikTok" class="footer-social"><img src="{% static 'images/icons8-tiktok-48.png' %}" alt="TikTok" style="height:1.7em;"></a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-copy">&copy; 2025 MiddleTimeWest. All rights reserved.</p>
+</footer>
+
+{% block extra_js %}
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+</body>
+</html>

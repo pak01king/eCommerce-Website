@@ -1,0 +1,233 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-in.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero {
+  position: relative;
+  background: url('../img/hero-bg.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 31, 68, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 3rem;
+}
+
+.hero-content p {
+  margin: 1rem 0 2rem;
+}
+
+.btn-discover {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-discover:hover {
+  background: #d4b879;
+}
+
+.herohero-watch-container {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 5%;
+  background-color: white;
+  position: relative;
+  z-index: 10; /* peste background-ul eroului */
+}
+
+.herohero-watch-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.herohero-watch-container .hero-left {
+  flex: 1;
+}
+
+.herohero-watch-container .hero-left img {
+  width: 100%; /* ocupă toată coloana stângă */
+  height: auto; /* înălțimea pe toată fereastra */
+  object-fit: cover; /* păstrează proporțiile și umple spațiul */
+  display: block;
+}
+
+.herohero-watch-container .hero-right {
+  flex: 1;
+  text-align: center;
+}
+
+.herohero-watch-container .hero-right img.watch-img {
+  max-width: 300px;
+  height: auto;
+}
+
+.herohero-watch-container .hero-right h4 {
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-top: 1rem;
+}
+
+.herohero-watch-container .hero-right h2 {
+  color:black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.herohero-watch-container .hero-right {
+  flex: 1;
+  text-align: center;
+}
+
+.herohero-watch-container .hero-right img.watch-img {
+  max-width: 280px; /* dimensiune standard */
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  object-fit: contain; /* nu taie ceasul */
+}
+
+
+
+.herohero-watch-container .btn-discover {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.herohero-watch-container .btn-discover:hover {
+  background: black;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .herohero-watch-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+
+.top-watches {
+  padding: 4rem 5%;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.watch-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.8rem 0 1rem;
+  color: #222;
+  font-family: 'Merriweather', serif;
+}
+
+.section-title {
+  color:black;
+  font-family:'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+
+}
+
+.watches-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.watch-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.watch-card:hover {
+  transform: translateY(-8px);
+}
+
+.watch-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.watch-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.watch-card .btn-discover {
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+  padding: 0.5rem 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.watch-card .btn-discover:hover {
+  background: black;
+  color: white;
+}
+
+@media (max-width: 992px) {
+  .watches-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .watches-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

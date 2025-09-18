@@ -1,0 +1,54 @@
+{% extends "store/base.html" %}
+{% block body_class %}homepage{% endblock %}
+{% block extra_css %}
+{% load static%}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+{% endblock %}
+{% block content %}
+
+<section class="hero" style="background-image: url('{% static "images/banner4.png" %}');">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Rigueur, élégance, distinction.</h1>
+      <p>Discover our exclusive collection of luxury watches</p>
+      <a href="{% url 'product_list' %}" class="btn-discover">Discover Collection</a>
+    </div>
+  </div>
+</section>
+
+<section class="herohero-watch-container">
+  <div class="hero-left">
+    <img src="{% static 'images/but1.jpg' %}" alt="Lifestyle Image">
+  </div>
+  <div class="hero-right">
+    {% if featured_product.image %}
+      <img src="{{ featured_product.image.url }}" alt="{{ featured_product.name }}" class="watch-img">
+    {% else %}
+      <img src="{% static 'images/default-watch.png' %}" alt="Default Watch" class="watch-img">
+    {% endif %}
+    <h2>BRILLIANT BY DESIGN,<br>FEARLESS BY NATURE</h2>
+    <a href="{% url 'product_detail' featured_product.slug %}" class="btn-discover">SHOP THE WATCH</a>
+  </div>
+</section>
+
+<section class="top-watches">
+  <h2 class="section-title">DISCOVER SOMETHING BETTER</h2>
+  <div class="watches-grid">
+    {% for product in top_products %}
+      <div class="watch-card">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        <h3 class="watch-title">{{ product.title }}</h3>
+        <a href="{% url 'product_detail' product.slug %}" class="btn-discover small-btn">View details</a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

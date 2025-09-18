@@ -1,0 +1,104 @@
+{% extends "store/base.html" %}
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="checkout-page">
+    <div class="checkout-container">
+        <h2 class="checkout-title">Checkout</h2>
+        <div class="checkout-products-list">
+            {% if cart %}
+                {% for item in cart %}
+                <div class="checkout-product-card">
+                    <img class="checkout-thumb" src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'images/no-image.png' %}{% endif %}" alt="{{ item.product.title }}">
+                    <div class="checkout-product-info">
+                        <div class="checkout-product-title">{{ item.product.title }}</div>
+                        <div class="checkout-product-brand">{{ item.product.brand }}</div>
+                        <div class="checkout-product-qty">Quantity: {{ item.quantity }}</div>
+                        {% if item.color %}
+                        <div class="checkout-product-color">Color: {{ item.color }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="checkout-product-price">{{ item.price }} EUR</div>
+                </div>
+                {% endfor %}
+                <div class="checkout-total">Total: {{ cart.get_total_price }} EUR</div>
+            {% endif %}
+        </div>
+        <div class="checkout-form">
+            <form id="checkout-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div id="paypal-button-container"></div>
+            </form>
+        </div>
+        {% if payment_status == 'success' %}
+            <div class="checkout-status success">Payment was successful! Your order has been placed.</div>
+            <form action="{% url 'product_list' %}" method="get">
+                <button type="submit" class="btn-checkout">Complete Order</button>
+            </form>
+        {% elif payment_status == 'error' %}
+            <div class="checkout-status error">An error occurred while processing the payment. Please try again!</div>
+        {% endif %}
+    </div>
+</div>
+<script src="https://www.paypal.com/sdk/js?client-id=AVo96lWYQ2v5c1H6RxiEKxthaZfPzD4IKs7SGqFireVthSfiAgCTbHsejUeQcnODZWGohxXJxiVeYqhQ&currency=EUR"></script>
+<script>
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+});
+paypal.Buttons({
+    fundingSource: paypal.FUNDING.PAYPAL,
+    style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+    createOrder: function(data, actions) {
+        let total = 0;
+        try {
+            total = parseFloat('{{ cart.get_total_price|floatformat:2|default:"0.00" }}');
+        } catch (e) { total = 0; }
+        let items = [
+            {% for item in cart %}
+            {
+                name: "{{ item.product.title|escapejs }}",
+                unit_amount: { value: "{{ item.price|floatformat:2 }}", currency_code: "EUR" },
+                quantity: "{{ item.quantity }}"
+            },
+            {% endfor %}
+        ];
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: total.toFixed(2),
+                    currency_code: "EUR",
+                    breakdown: {
+                        item_total: { value: total.toFixed(2), currency_code: "EUR" }
+                    }
+                },
+                items: items
+            }]
+        });
+    },
+    // Nu forțăm redirect, lăsăm PayPal să decidă modal/redirect
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            const formData = new FormData(document.getElementById('checkout-form'));
+            formData.append('paypal_order_id', data.orderID);
+            fetch('{% url "checkout" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            });
+        });
+    }
+}).render('#paypal-button-container');
+</script>
+{% endblock %}

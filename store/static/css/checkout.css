@@ -1,0 +1,257 @@
+body.checkout-page {
+    background: linear-gradient(120deg, #0a1f44 0%, #1a1a2e 100%);
+    min-height: 100vh;
+    font-family: 'Montserrat', 'Merriweather', Arial, sans-serif;
+}
+
+label {
+    cursor: default;
+    font-weight: 700;
+    color: #0a1f44;
+    font-size: 1.08rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 1px 8px #c5a46d22;
+    background: linear-gradient(90deg, #fffbe6 60%, #f8f8f8 100%);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.7rem;
+    display: inline-block;
+    box-shadow: 0 1px 4px #c5a46d11;
+    transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.checkout-container {
+    max-width: 900px;
+    margin: 2.5rem auto 0 auto;
+    background: rgba(255,255,255,0.97);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 32px 0 #0a1f44cc, 0 1.5px 8px #c5a46d33;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.checkout-container::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #c5a46d55 0%, transparent 80%);
+    filter: blur(30px);
+    z-index: 0;
+}
+.checkout-title {
+    font-size: 2.2rem;
+    font-family: 'Merriweather', serif;
+    color: #0a1f44;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 12px #c5a46d22;
+}
+.checkout-products-list {
+    margin-bottom: 2rem;
+}
+.checkout-product-card {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 1px 8px #0a1f4411;
+    padding: 1.1rem 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+.checkout-product-card:hover {
+    box-shadow: 0 4px 24px #c5a46d33, 0 1.5px 8px #0a1f4411;
+}
+.checkout-thumb {
+    width: 60px; height: 60px; object-fit: cover; border-radius: 8px; box-shadow: 0 1px 4px #c5a46d22;
+}
+.checkout-product-info {
+    flex: 1 1 0;
+}
+.checkout-product-title {
+    font-weight: 600;
+    color: #0a1f44;
+    font-size: 1.1rem;
+}
+.checkout-product-brand {
+    font-size: 0.98rem;
+    color: #444;
+    margin-bottom: 0.2rem;
+}
+.checkout-product-qty {
+    font-size: 0.98rem;
+    color: #222;
+}
+.checkout-product-price {
+    font-size: 1rem;
+    color: #c5a46d;
+    font-weight: 500;
+}
+.checkout-total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #c5a46d;
+    margin: 1.2rem 0 2rem 0;
+    text-align: right;
+}
+.checkout-form {
+    background: #f8f8f8;
+    border-radius: 1rem;
+    padding: 2rem 2.2rem 1.5rem 2.2rem;
+    box-shadow: 0 1px 8px #0a1f4411;
+    margin-bottom: 2rem;
+}
+#paypal-button-container {
+    margin-top: 1.5rem;
+}
+.btn-checkout {
+    background: #c5a46d;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.7rem 2.2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 1.2rem;
+    box-shadow: 0 2px 12px #c5a46d33;
+}
+.btn-checkout:hover {
+    background: #a88a54;
+    color: #fff;
+}
+.checkout-status {
+    margin-top:1.5rem; border-radius:8px; padding:1rem; font-weight:600; font-size:1.1rem;
+}
+.checkout-status.success { color:#1a7f37; background:#e6f9ed; }
+.checkout-status.error { color:#b91c1c; background:#ffeaea; }
+/* Background luxury */
+.checkout-wrapper {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #fdfdfd;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    font-family: "Playfair Display", serif;
+    color: #222;
+}
+
+/* Header */
+.checkout-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.checkout-header h2 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: #111;
+    text-transform: uppercase;
+}
+.checkout-header p {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 8px;
+}
+
+/* Cart Summary */
+.cart-summary {
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    background: #fafafa;
+}
+.cart-summary h3 {
+    margin-bottom: 15px;
+    color: #111;
+    font-weight: 600;
+}
+.cart-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.cart-summary li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+.cart-summary li:last-child {
+    border-bottom: none;
+}
+.product-name {
+    font-weight: 600;
+}
+.product-details {
+    color: #555;
+    font-size: 0.9rem;
+}
+.product-total {
+    font-weight: 600;
+    color: #000;
+}
+.cart-total {
+    text-align: right;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+/* Form */
+.checkout-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.checkout-form-container label {
+    font-weight: 600;
+    color: #333;
+}
+.checkout-form-container input,
+.checkout-form-container select,
+.checkout-form-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.3s ease;
+}
+.checkout-form-container input:focus,
+.checkout-form-container select:focus,
+.checkout-form-container textarea:focus {
+    border: 1px solid #b59f6c;
+    outline: none;
+}
+
+/* Buton */
+.checkout-btn {
+    padding: 14px;
+    background: linear-gradient(90deg, #111, #333);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.checkout-btn:hover {
+    background: linear-gradient(90deg, #b59f6c, #d4c29c);
+    color: #111;
+}
+
+/* PayPal */
+#paypal-button-container {
+    margin-top: 20px;
+}

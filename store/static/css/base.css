@@ -1,0 +1,93 @@
+:root {
+  --navy: #0a1f44;
+  --beige: #f5f0e1;
+  --gold: #c5a46d;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--navy);
+  color: var(--beige);
+}
+
+
+main {
+  padding-top: 64px; /* ajustat pentru header mai îngust */
+  min-height: 70vh;
+}
+
+.site-header {
+  min-height: 48px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--beige);
+}
+
+.site-header {
+  background: rgba(10, 31, 68, 0.9);
+  padding: 0.4rem 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.logo {
+  font-family: 'Merriweather', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.site-nav a {
+  margin-left: 2rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.site-nav a:hover {
+  color: var(--gold);
+}
+
+.site-footer {
+  background: #050d1a;
+  padding: 2rem;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-social img {
+  filter: brightness(0) invert(1);
+  transition: filter 0.2s;
+}
+.footer-social img:hover {
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px #fff8);
+}
+
+
+.footer-col h4 {
+  margin-bottom: 1rem;
+}
+
+.footer-copy {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}

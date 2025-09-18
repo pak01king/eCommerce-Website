@@ -1,0 +1,316 @@
+/* Make product details button text black */
+a.btn-details {
+  color: #111 !important;
+}
+/* Sidebar filtre categorii/branduri */
+#filter-button {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.6rem 1.6rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(10,31,68,0.07);
+}
+#filter-button:hover {
+  background: #a88a54;
+  color: #fff;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 210px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #fff;
+  color: #111;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: 2px 0 24px rgba(10,31,68,0.13);
+  z-index: 2000;
+  padding: 1.1rem 0.7rem 1rem 0.7rem;
+  overflow-y: auto;
+  transform: translateX(-110%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(.77,0,.18,1), opacity 0.25s;
+  border-top-right-radius: 1.1rem;
+  border-bottom-right-radius: 1.1rem;
+}
+.sidebar.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 1.05rem;
+  color: #111;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.sidebar .no-bullets {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+}
+.sidebar .no-bullets li {
+  margin-bottom: 0.3rem;
+}
+.sidebar .no-bullets a {
+  color: #111;
+  text-decoration: none;
+  font-size: 0.98rem;
+  padding: 0.32rem 0.5rem;
+  border-radius: 0.5rem;
+  display: block;
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar .no-bullets a:hover,
+.sidebar .no-bullets a.active {
+  background: #f5f0e1;
+  color: var(--gold);
+}
+#close-sidebar {
+  background: #eee;
+  color: #222;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+#close-sidebar:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 90vw;
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+  }
+}
+/* Stiluri pentru formularul de filtre */
+.product-list-container {
+  margin-top: 1.5rem;
+}
+
+.product-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 2px 12px rgba(10,31,68,0.07);
+  padding: 1.2rem 2rem;
+  margin: 0 auto 2.5rem auto;
+  max-width: 700px;
+  color: #111;
+}
+.product-filters input[type="text"],
+.product-filters input[type="number"] {
+  border: 1px solid #c5a46d;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  outline: none;
+  background: #f5f0e1;
+  color: #111;
+  transition: border 0.2s;
+  min-width: 120px;
+}
+/* Dropdown stilizare */
+.dropdown-filter {
+  position: relative;
+}
+.dropdown-btn {
+  background: #f5f0e1;
+  color: #111;
+  border: 1px solid #c5a46d;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+.dropdown-btn:hover {
+  background: #e0d3b8;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  min-width: 180px;
+  box-shadow: 0 2px 12px rgba(10,31,68,0.12);
+  border-radius: 1rem;
+  z-index: 10;
+  padding: 0.5rem 0;
+}
+.dropdown-content a {
+  display: block;
+  color: #111;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.dropdown-content a.active,
+.dropdown-content a:hover {
+  background: #f5f0e1;
+  color: #c5a46d;
+}
+.product-filters input:focus {
+  border-color: #0a1f44;
+}
+.product-filters button[type="submit"] {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.product-filters button[type="submit"]:hover {
+  background: #a88a54;
+  color: #fff;
+}
+/* Stil pentru grid compact și slider imagini produse */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.product-card.compact-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+  padding: 1.2rem 1rem 1.5rem 1rem;
+  width: 260px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.slider-gallery {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-images {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slider-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+}
+.slider-img.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+
+.slider-arrow {
+  background: rgba(0,0,0,0.15);
+  border: none;
+  color: #222;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+.slider-gallery:hover .slider-arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slider-arrow.prev { left: 8px; }
+.slider-arrow.next { right: 8px; }
+.slider-arrow:hover { background: rgba(0,0,0,0.3); color: #fff; }
+
+.product-card h3 {
+  color:#111;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0.2rem 0;
+  text-align: center;
+}
+.product-price {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.btn-add, .btn-buy {
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #222;
+  background: #fff;
+  color: #222;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-add:hover, .btn-buy:hover {
+  background: #222;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .product-card.compact-box {
+    width: 98vw;
+    min-width: 0;
+    padding: 0.7rem 0.2rem 1rem 0.2rem;
+  }
+  .slider-gallery {
+    width: 90vw;
+    height: 180px;
+  }
+}

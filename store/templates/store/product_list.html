@@ -1,0 +1,68 @@
+{% extends "store/base.html" %}
+{% block body_class %}product-list-page{% endblock %}
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-list-container">
+    <!-- Sidebar pentru filtre -->
+    <div id="filter-sidebar" class="sidebar">
+        <button id="close-sidebar" type="button" aria-label="Închide">&times;</button>
+        <a href="." class="reset-filters" style="display:block;margin-bottom:1rem;font-weight:bold;">All Watches</a>
+        <h3>Categories</h3>
+        <ul class="no-bullets">
+            {% for category in categories %}
+                <li><a href="?category={{ category.slug }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <h3>Branduri</h3>
+        <ul class="no-bullets">
+            {% for brand in brands %}
+                <li><a href="?brand={{ brand.slug }}">{{ brand.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <button id="filter-button" type="button" style="margin-bottom:1.2rem;">CATEGORIES/BRANDS</button>
+    <form method="get" class="product-filters" id="main-filters">
+        <input type="text" name="q" placeholder="Search for watch..." value="{{ request.GET.q }}">
+        <input type="number" name="min_price" placeholder="Cheap First" value="{{ request.GET.min_price }}">
+        <input type="number" name="max_price" placeholder="Expensive Last" value="{{ request.GET.max_price }}">
+
+        <button type="submit">Filter</button>
+        <a href="." class="reset-filters-btn" style="margin-left:1rem; color:#111; text-decoration:underline;">Reset filters</a>
+    </form>
+{% block extra_js %}
+<script src="{% static 'js/product_list.js' %}"></script>
+{% endblock %}
+
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card compact-box">
+            <div class="product-image-gallery slider-gallery">
+                <button class="slider-arrow prev" aria-label="Imagine anterioară">&#8592;</button>
+                <div class="slider-images">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="slider-img active">
+                    {% for img in product.images.all %}
+                        <img src="{{ img.image.url }}" alt="{{ product.name }}" class="slider-img">
+                    {% endfor %}
+                </div>
+                <button class="slider-arrow next" aria-label="Imagine următoare">&#8594;</button>
+            </div>
+            <h3>{{ product.title }}</h3>
+            <p class="product-price">{{ product.price }} EUR</p>
+            <div class="product-actions">
+                <form method="post" action="{% url 'cart_add' product.id %}">{% csrf_token %}
+                    <button type="submit" class="btn-add">Add to Cart</button>
+                </form>
+                <a href="{% url 'product_detail' product.slug %}" class="btn-buy">Buy Now</a>
+                <a href="{% url 'product_detail' product.slug %}" class="btn-details">View Details</a>
+            </div>
+        </div>
+        {% empty %}
+            <p>No products match the filter.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

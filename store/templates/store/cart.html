@@ -1,0 +1,58 @@
+{% extends "store/base.html" %}
+
+{% block title %}Coș{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <h2>Coșul tău</h2>
+    {% if cart %}
+        <div class="cart-list">
+            {% for item in cart %}
+            <div class="cart-item-card">
+                <div class="cart-item-img">
+                    {% if item.product.image %}
+                        <a href="{% url 'product_detail' item.product.slug %}"><img src="{{ item.product.image.url }}" alt="{{ item.product.title }}"></a>
+                    {% endif %}
+                </div>
+                <div class="cart-item-info">
+                    <a href="{% url 'product_detail' item.product.slug %}" class="cart-item-title">{{ item.product.title }}</a>
+                    {% if item.product.brand %}<div class="cart-item-brand">{{ item.product.brand.name }}</div>{% endif %}
+                    <div class="cart-item-price">PRICE: {{ item.price }} USD</div>
+                    <div class="cart-item-qty-row">
+                        <label for="qty-{{ item.product.id }}">Quantity:</label>
+                        <input type="number" min="1" value="{{ item.quantity }}" class="cart-qty-input" id="qty-{{ item.product.id }}" data-product="{{ item.product.id }}">
+                    </div>
+                    <div class="cart-item-total">Total: <span class="cart-line-total">{{ item.total_price }}</span> USD</div>
+                </div>
+                <div class="cart-item-remove">
+                    <a href="{% url 'cart_remove' item.product.id %}" class="cart-remove-btn" title="Șterge"><span>&#128465;</span></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="cart-summary-sticky">
+            <div class="cart-summary">
+                <div class="cart-total-label">Total:</div>
+                <div class="cart-total-value">{{ cart.get_total_price }} USD</div>
+            </div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'checkout' %}" class="btn-checkout">Finalizează comanda</a>
+            {% else %}
+                <a href="{% url 'register_login' %}" class="btn-checkout">Autentifică-te sau creează cont pentru a finaliza comanda</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="cart-empty">
+            <p>Coșul este gol. <a href="{% url 'product_list' %}" class="btn-back">Înapoi la magazin</a></p>
+        </div>
+    {% endif %}
+</div>
+{% block extra_js %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+{% endblock %}
